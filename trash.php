@@ -55,9 +55,7 @@ function ts(){
 	br();
 }
 ts();
-get_status('arr','now');
-//comnet();
-cs();
+comnet();
 
 
 

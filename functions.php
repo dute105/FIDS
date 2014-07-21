@@ -412,16 +412,18 @@ foreach($xml->row as $Flight){
 	settype($gate, "string");
 	if($gate=='')
 		{
-			$gate=$gate_array[$ac];
+			$gate=gates2($flight_number, $ac);
 		}
 	elseif($gate=="TBA")
 		{
-			$gate=$gate_array[$ac];
+			$gate=gates2($flight_number, $ac);
 		}
 	if($claim=='')
 		{
-			$claim=$claim_array[$ac];
+			$claim=claims($flight_number, $ac);
 		}
+		
+		$city=city($iata);
 				
 	
 	if($actual_time>=$now)
