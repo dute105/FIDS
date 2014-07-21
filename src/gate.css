@@ -1,0 +1,411 @@
+@charset "utf-8";
+/* Simple fluid media
+   Note: Fluid media requires that you remove the media's height and width attributes from the HTML
+   http://www.alistapart.com/articles/fluid-images/ 
+*/
+img, object, embed, video {
+	max-width: 100%;
+}
+/* IE 6 does not support max-width so default to width 100% */
+.ie6 img {
+	width:100%;
+}
+
+.left {
+	float:left;
+}
+.right {
+	float:right;
+}
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	background-color: #000;
+}
+.Delayed{
+	color:#FF3;
+}
+.Cancelled{
+	color: #F00;
+	
+}
+.Boarding{
+	color: #0F0;
+   -webkit-animation: blink 8s; /* Chrome, Safari, Opera */
+	-webkit-animation-iteration-count: infinite;
+    animation: blink 8s;
+}
+/* Chrome, Safari, Opera */
+@-webkit-keyframes blink {
+    0%   {opacity: 0;}
+    25%  {opacity: .5;}
+    50%  {opacity: 1;}
+    100% {opacity: 0;}
+}
+
+/* Standard syntax */
+@keyframes blink {
+    0%   {opacity: 0;}
+    25%  {opacity: .5;}
+    50%  {opacity: 1;}
+    100% {opacity: .5;}
+}
+/*
+	Dreamweaver Fluid Grid Properties
+	----------------------------------
+	dw-num-cols-mobile:		5;
+	dw-num-cols-tablet:		8;
+	dw-num-cols-desktop:	10;
+	dw-gutter-percentage:	25;
+	
+	Inspiration from "Responsive Web Design" by Ethan Marcotte 
+	http://www.alistapart.com/articles/responsive-web-design
+	
+	and Golden Grid System by Joni Korpi
+	http://goldengridsystem.com/
+*/
+
+/* Mobile Layout: 480px and below. */
+
+#template {
+	/*background-color:#F90;
+	
+	width: 1366px;
+	height: 768px;*/
+	position: relative;
+	overflow:hidden;
+}
+.label {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	color: #0095d8;
+	
+}
+.innerlabel {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #0095d8;
+	text-align:left;
+	padding:1%;
+}
+#gate {
+	position: relative;
+	margin: 1%;
+	margin-top:1%;
+	
+}
+.ac {
+	width: 39%;
+}
+.data {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 26px;
+	color: #fff;
+	padding-top:3.5%;
+	
+}
+.gate {
+	width: 33%;
+	
+}
+.message {
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border: 2px inset #606060;
+	width: 37%;
+	float:left;
+	padding:.5%;
+	background-color:#333333;
+	display:none;
+}
+.clears {
+	clear: both;
+	height: 6px;
+}
+.details{
+	float:right;
+	
+	width: 100%;
+	
+	
+	
+}
+.full_details{
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border: 2px inset #606060;
+	padding:.5%;
+	text-align:center;
+	background-color:#333333;
+	
+}
+.innerdata {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	color: #fff;
+	padding:1%;
+	
+	
+}
+.half_details{
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border: 2px inset #606060;
+	padding:.5%;
+	text-align:left;
+	background-color:#333333;
+	
+	width:46%;
+	
+	
+}
+
+@media only screen and (min-width: 481px) {
+#template {
+	/*background-color:#F90;
+	
+	width: 1366px;
+	height: 768px;*/
+	position: relative;
+	overflow:hidden;
+}
+.label {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 28px;
+	color: #0095d8;
+	
+}
+.innerlabel {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 24px;
+	color: #0095d8;
+	text-align:left;
+	padding:1%;
+}
+#gate {
+	position: relative;
+	margin: 1%;
+	margin-top:5%;
+	
+}
+.ac {
+	width: 39%;
+}
+.data {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 70px;
+	color: #fff;
+	padding-top:3.5%;
+	
+}
+.gate {
+	width: 33%;
+	
+}
+.message {
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border: 2px inset #606060;
+	width: 37%;
+	float:left;
+	padding:.5%;
+	background-color:#333333;
+	display:none;
+}
+.clears {
+	clear: both;
+	height: 20px;
+}
+.details{
+	float:right;
+	
+	width: 100%;
+	
+	
+	
+}
+.full_details{
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border: 2px inset #606060;
+	padding:.5%;
+	text-align:center;
+	background-color:#333333;
+	
+}
+.innerdata {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 45px;
+	color: #fff;
+	padding:1%;
+	
+	
+}
+.half_details{
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border: 2px inset #606060;
+	padding:.5%;
+	text-align:left;
+	background-color:#333333;
+	
+	width:46%;
+	
+	
+}
+}
+
+/* Desktop Layout: 769px to a max of 1232px.  Inherits styles from: Mobile Layout and Tablet Layout. */
+
+@media only screen and (min-width: 801px) {
+#template {
+	/*background-color:#F90;
+	
+	width: 1366px;
+	height: 768px;*/
+	position: relative;
+	overflow:hidden;
+}
+.label {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 34px;
+	color: #0095d8;
+	
+}
+.innerlabel {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 28px;
+	color: #0095d8;
+	text-align:left;
+	padding:1%;
+}
+#gate {
+	position: relative;
+	margin: 1%;
+	margin-top:5%;
+	
+}
+.gate-wrapper1 {
+	position: relative;
+	margin: 1%;
+	margin-top:5%;
+	float:left;
+	width:98%;
+	
+}
+.gate-wrapper2 {
+	position: relative;
+	margin: 1%;
+	margin-top:5%;
+	float:left;
+	width:48%;
+	
+}
+.ac {
+	width: 57%;
+	height:175px;
+	overflow:hidden;
+	
+}
+.data {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 100px;
+	color: #fff;
+	padding-top:3.5%;
+	
+}
+.gate {
+	width: 33%;
+	
+}
+.message1 {
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border: 2px inset #606060;
+	width: 37%;
+	float:left;
+	padding:.5%;
+	background-color:#333333;
+	display:block;
+}
+.message2 {
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border: 2px inset #606060;
+	width: 37%;
+	float:left;
+	padding:.5%;
+	background-color:#333333;
+	display:none;
+}
+.clears {
+	clear: both;
+	height: 20px;
+}
+.details1{
+	float:right;
+	
+	width: 58%;
+	
+	
+	
+}
+.details2{
+	float:right;
+	
+	width: 100%;
+	
+	
+	
+}
+.full_details{
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border: 2px inset #606060;
+	padding:.5%;
+	text-align:center;
+	background-color:#333333;
+	
+}
+.innerdata {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 65px;
+	color: #fff;
+	padding:1%;
+	height:80px;
+	overflow:hidden;
+	
+	
+}
+.half_details{
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border: 2px inset #606060;
+	padding:.5%;
+	text-align:left;
+	background-color:#333333;
+	
+	width:46%;
+	
+	
+}
+#noflight{
+width:80%;	
+margin:auto;
+margin-top:100px;
+
+}
+
+}

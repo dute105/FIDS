@@ -1,0 +1,97 @@
+@charset "utf-8";
+
+body{
+	background-color:#000;
+color:#FFFFFF;	
+}
+#fids{
+background-color:#0F0;
+	
+}
+#logo{
+	float:right;
+	max-width:200px;
+	/*padding:20px;*/
+	
+}
+.clears{
+	clear:both;
+}
+#arrivals{
+	
+	height: 1220px;
+	overflow: hidden;
+	font-weight: bold;	
+}
+#departures{
+	height: 1220px;
+	overflow: hidden;
+	font-weight: bold;	
+	
+}
+#departures th{
+	background-color:#9999cc;
+	font-size: 16px;
+	
+}
+#arrivals th{
+	background-color:#669999;
+	font-size: 16px;
+	
+}
+table, td, th{
+	color: white;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	font-size: 16px;
+	text-align:left;
+}
+td{
+	padding:5px;
+	
+	
+}
+tr{
+	text-indent:5px;
+	
+	
+}
+header{
+	
+	padding:5px;
+}
+.ac_logo{
+	
+	float:left;
+	height:22px;
+	
+}
+.actext{
+	
+	padding-top:2px;
+	padding-left:2px;
+	margin-top:20px;
+}
+
+.date
+{
+float:left;	
+font-size: 20px;
+}
+.time
+{
+	float:right;
+	margin-right:3%;
+	font-size: 20px;
+}
+#date_time_bar
+{
+	width:100%;
+	
+	margin-bottom: 1%;
+	font-family: Arial, Helvetica, sans-serif;
+	
+	/*letter-spacing: -.07em;
+	position: absolute;	*/
+}
+
