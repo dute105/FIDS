@@ -1,8 +1,27 @@
 <?php
 include('db.php');
-function max_time($adi, $rows){
-	$now=date('Y-m-d H:i', strtotime("-15 minute"));
-	$day=date('Y-m-d');
+function logo($ac){
+	$result = mysql_query("SELECT * from ac where AC='$ac'");
+	
+	
+	while($row = mysql_fetch_array($result))
+	
+	  { $logo=$row['IMG'];}
+	 return $logo;
+	
+	
+}
+function max_time($adi, $rows, $day){
+	if($day=='tomorrow')
+	{
+		$now=date('Y-m-d 00:00', strtotime("+1 day"));
+		$day=date('Y-m-d', strtotime("+1 day"));
+	}
+	else
+	{
+		$now=date('Y-m-d H:i', strtotime("-15 minute"));
+		$day=date('Y-m-d');
+	}
 	$result = mysql_query("SELECT actual_time from current where adi='$adi' and date='$day' and actual_time > '$now' order by actual_time limit $rows");
 	
 	
@@ -16,7 +35,8 @@ function max_time($adi, $rows){
 
 function display($adi){
 	$time="now";
-	$rows=37;
+	$rows=38;
+	$min_limit=$rows/2;
 	if($adi=='a')
 		{
 			$table="current";
@@ -26,7 +46,7 @@ function display($adi){
 			$gc_class="claim";
 			
 		}
-	elseif($adi='d')
+	elseif($adi=='d')
 		{
 			$table="current";
 			$get_status="dep";
@@ -35,10 +55,12 @@ function display($adi){
 			$gc_class="gate";
 		}
 
-	$at=max_time($adi,$rows);
+	$at=max_time($adi,$rows, 'today');
 	$now=date('Y-m-d H:i', strtotime("-15 minute"));
 	
-	$result = mysql_query("SELECT * from $table, ac where $table.ac=ac.AC and adi='$adi' and $table.actual_time between '$now' and '$at' order by city asc, ac.ac asc, scheduled_time asc limit $rows");
+	//$result = mysql_query("SELECT * from $table, ac where $table.ac=ac.AC and adi='$adi' and $table.actual_time between '$now' and '$at' order by city asc, ac.ac asc, scheduled_time asc limit $rows");
+		$result = mysql_query("SELECT * from $table where adi='$adi' and $table.actual_time between '$now' and '$at' order by city asc, ac asc, scheduled_time asc limit $rows");
+	$nrows=mysql_num_rows($result);
 	if(mysql_num_rows($result)==0)
 		{
 			get_status($get_status, $time);
@@ -62,8 +84,149 @@ function display($adi){
 		  $city=strtoupper($row['city']);
 		  $ac=$row['ac'];
 		   $ac2=$row['ac2'];
-		  $IMG=$row['IMG'];
+		   $IMG=logo($ac);
+		  $flight=$row['flight_number'];
+		  $status=$row['status'];
+		 
+		   $gate=$row['gate'];
+		  $claim=$row['claim'];
+		  $scheduled_time=$row['scheduled_time'];
+		   $actual_time=$row['actual_time'];
+		   $str_at=strtotime($actual_time);
+		   $boarding=strtotime("-30 minute",$str_at);
+		   $rnow=strtotime('now');
+		  
+		  $pattern=array('/:/','/-/');
+		  $replacement = '';
+		  $FID=preg_replace($pattern, $replacement, $FID, -1 );
+		  if($adi=='a')
+					{
+						$GC=$claim;
+						$gc_class="claim";
+						
+					}
+				elseif($adi=="d")
+					{
+						$GC=$gate;
+						$gc_class="gate";
+						
+						if($status=="On Time")
+						{
+							if($rnow>$boarding)
+							{
+								//$status="<span class='Boarding'>Boarding</span>";	
+								$status="Boarding";	
+							}
+						}
+					
+						
+					}
+		 
+		  
+		  
+		   
+			$actual_time=date("g:i A", strtotime("$actual_time"));
+			$scheduled_time=date("g:i A", strtotime("$scheduled_time"));
+			
+		 
+		 
+		  $start_date = new DateTime($scheduled_time);
+			$since_start = $start_date->diff(new DateTime($actual_time));
+
+			$dif= $since_start->i;
+			if($dif>4)
+				{
+				if($status=="On Time")
+					{
+						
+						$status="<span>Now $actual_time</span>";
+					}
+				elseif($status=="Delayed")
+					{
+						$status="<span class='Delayed'>Delayed: $actual_time</span>";	
+					}
+				
+				
+				
+				}
+			else
+				{		
+			
+					$status="<span class='$status'>$status</span>";
+				}
+				
+				
+				
+					
+		  
+		  
+		  	echo"<tr id='$FID'>";
+		  	echo "<td class='city'>$city</td>";
+		    
+		
+		  
+			echo "<td class='ac'><img src='img/$IMG' class='ac_logo' /><span class='actext'>$ac</span></td>";
+			echo "<td class='flight'>$flight</td>";
+			echo "<td class='scheduled_time'>$scheduled_time</td>";
+			 
+			 
+			echo "<td class='status'>$status</td>";
+			echo "<td class='$gc_class'>$GC</td>";
+		  	echo"</tr>";
+		  }	
+			if($nrows<$min_limit)
+			{	 
+				$trows=$rows-$nrows;
+				tomorrow($trows, $adi);
+			}
+			echo"</table>";
+	
+}
+function tomorrow($rows, $adi){
+	$rows=$rows-3;
+	
+	$tomorrow=date('l F j Y', strtotime("+1 day"));
+	echo"<tr class='spacer'><td colspan='6'></td></tr>";
+
+	echo"<tr class='tomorrow'><td colspan='6'>Flights for $tomorrow</td></tr>";
+	
+	
+	$tnow=date('Y-m-d', strtotime("+1 day"));
+	if($adi=='a')
+		{
+			$table="current";
+			$get_status="arr";
+			$from="Arriving From";
+			$gate_claim="Claim";
+			$gc_class="claim";
+			
+		}
+	elseif($adi=='d')
+		{
+			$table="current";
+			$get_status="dep";
+			$from="Departing To";
+			$gate_claim="Gate";
+			$gc_class="gate";
+		}
+	$at=max_time($adi,$rows, 'tomorrow');
+	$now=date('Y-m-d 00:00', strtotime("+1 day"));
+//$result = mysql_query("SELECT * from $table where date='$tnow' and adi='$adi' order by city  limit $rows");
+$result = mysql_query("SELECT * from $table where  date='$tnow' and adi='$adi' and $table.actual_time between '$now' and '$at' order by city asc, ac asc, scheduled_time asc limit $rows");
+	$nrows=mysql_num_rows($result);
+	if(mysql_num_rows($result)==0)
+		{
+			get_status($get_status, $time);
+			
+		}
+		while($row = mysql_fetch_array($result))
+	
+	  {
+		  $FID=$row['fid'];
+		  $city=strtoupper($row['city']);
 		  $ac=$row['ac'];
+		   $ac2=$row['ac2'];
+		 $IMG=logo($ac);
 		  $flight=$row['flight_number'];
 		  $status=$row['status'];
 		 
@@ -144,10 +307,9 @@ function display($adi){
 			    echo "<td class='$gc_class'>$GC</td>";
 		  echo"</tr>";
 		  }	
-	echo"</table>";
+		
 	
 }
-
 
 
 

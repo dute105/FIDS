@@ -34,6 +34,13 @@ background-color:#0F0;
 	font-size: 16px;
 	
 }
+.tomorrow{
+	background-color:#4c4c66;
+	/*opacity:0.5;*/
+}
+.spacer{
+	height:30px;
+}
 #arrivals th{
 	background-color:#669999;
 	font-size: 16px;
@@ -83,6 +90,7 @@ font-size: 20px;
 	float:right;
 	margin-right:3%;
 	font-size: 20px;
+	text-align:right;
 }
 #date_time_bar
 {

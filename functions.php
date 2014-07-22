@@ -244,7 +244,8 @@ function update_from_temp(){
 			$IATA=$row['IATA'];
 			$CITY=$row['CITY'];
 			$DATE=$row['DATE'];
-		 	mysql_query("update current set actual_time='$ATIME',STATUS='$STATUS' where fid='$FID'");
+		 	//mysql_query("update current set actual_time='$ATIME',status='$STATUS' where fid='$FID'");
+			mysql_query("update current set actual_time='$ATIME',status='$STATUS' where flight_number=$FLIGHT and adi='$ADI' and date='$DATE'");
 		
 			mysql_query("Insert into updated (fid, ac, ac2, flight_number, adi, gate, claim, scheduled_time, actual_time, status, iata, city, date)
 			VALUES('$FID','$AC','$AC2','$FLIGHT','$ADI','$GATE',$CLAIM, '$STIME','$ATIME','$STATUS','$IATA','$CITY','$DATE')");
@@ -430,7 +431,7 @@ foreach($xml->row as $Flight){
 		{
 	
 			
-			$result = mysql_query("SELECT * from temp where AC='$ac' and FLIGHT_NUMBER='$flight_number' and ADI='$adi' and IATA='$iata'");
+			$result = mysql_query("SELECT * from temp where AC='$ac' and FLIGHT_NUMBER='$flight_number' and ADI='$adi' and IATA='$iata' and date='$date'");
 			if(mysql_num_rows($result)==0)
 				{
 					mysql_query("INSERT INTO temp (FID, AC, AC2,FLIGHT_NUMBER, CS,ADI,GATE, CLAIM, SCHEDULED_TIME, ACTUAL_TIME, STATUS, IATA, CITY, DATE )
@@ -482,7 +483,7 @@ function thin_codeshare($AC, $FLIGHT, $fid, $ADI, $IATA){
 }
 function cs()
 {
-	$result = mysql_query("SELECT FID, count(FID) as COUNT, CS from temp where ADI='D' group by FLIGHT_NUMBER");
+	$result = mysql_query("SELECT FID, count(FID) as COUNT, CS from temp where ADI='D' group by AC, FLIGHT_NUMBER, DATE");
 	if(mysql_num_rows($result)==0)
 		{
 			//echo"nada<br />";

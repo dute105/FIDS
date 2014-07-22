@@ -47,17 +47,43 @@ codeshare();
 <body>
 
 <?php
+//include('display_functions.php');
 include('functions.php');
-mysql_query("DELETE from temp");
 
 function ts(){
 	echo date('H:i:s');
-	br();
+	//br();
 }
 ts();
+get_status('dep', 'now');
 comnet();
 
-
+//cs();
+check_temp();
+//update_from_temp();	
+ $at=test("d", 10, "tomorrow");
+ echo $at;
+function test($adi, $rows, $day){
+	if($day=="tomorrow")
+	{
+		$now=date('Y-m-d 00:00', strtotime("+1 day"));
+		$day=date('Y-m-d', strtotime("+1 day"));
+	}
+	else
+	{
+		$now=date('Y-m-d H:i', strtotime("-15 minute"));
+		$day=date('Y-m-d');
+	}
+	$result = mysql_query("SELECT actual_time from current where adi='$adi' and date='$day' and actual_time > '$now' order by actual_time limit $rows");
+	
+	
+	while($row = mysql_fetch_array($result))
+	
+	  { $at=$row['actual_time'];}
+	 return $at;
+	
+	
+}
 
 
 
