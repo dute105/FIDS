@@ -74,13 +74,7 @@ display('a');
 
 </div>
 <?php
-$bldate=date('l F j Y');
-$bltime=date('g:i A');
-echo"<table width='100%'>";
-echo"<tr id='date_time_bar'>";
-echo"<td class='date'>$bldate</td>";
-echo "<td class='time'>$bltime</td>";
-echo"</tr>";
+datetime();
 ?>
 </div>
 </div>

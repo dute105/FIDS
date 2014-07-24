@@ -14,6 +14,7 @@ $gate=strtoupper($_GET['id']);
 <title>gate<?php echo " $gate "; refresh("GATE","$gate"); ?></title>
   
   <link href="src/gate.css" rel="stylesheet" type="text/css" />
+
  <script src="src/jquery-1.10.2.js"></script>
   <script src="src/jquery-ui.js"></script>
   <script src="src/respond.min.js"></script>
@@ -54,6 +55,7 @@ cs_flight1();
 </head>
 
 <body>
+
 <div id="template">
 <?php
 gate_display($gate);
@@ -65,9 +67,11 @@ gate_display($gate);
 
 
 
-
 </div>
 
+<?php
+datetime();
+?>
 
 
 </body>

@@ -37,6 +37,8 @@ function display($adi){
 	$time="now";
 	$rows=38;
 	$min_limit=$rows/2;
+	$rc=1;
+	
 	if($adi=='a')
 		{
 			$table="current";
@@ -59,14 +61,14 @@ function display($adi){
 	$now=date('Y-m-d H:i', strtotime("-15 minute"));
 	
 	//$result = mysql_query("SELECT * from $table, ac where $table.ac=ac.AC and adi='$adi' and $table.actual_time between '$now' and '$at' order by city asc, ac.ac asc, scheduled_time asc limit $rows");
-		$result = mysql_query("SELECT * from $table where adi='$adi' and $table.actual_time between '$now' and '$at' order by city asc, ac asc, scheduled_time asc limit $rows");
+		$result = mysql_query("SELECT * from $table where adi='$adi' and $table.actual_time between '$now' and '$at' and iata !='TUS' and city !='' order by city asc, ac asc, scheduled_time asc limit $rows");
 	$nrows=mysql_num_rows($result);
 	if(mysql_num_rows($result)==0)
 		{
 			get_status($get_status, $time);
 			
 		}
-		
+	
 	echo"<table width='100%'>";
 	echo"<tr>";
 	echo"<th>$from</th>";
@@ -158,9 +160,10 @@ function display($adi){
 				
 				
 					
+		 	$tr=($rc % 2) ? "odd" :"even"; 	
+			$rc++;
 		  
-		  
-		  	echo"<tr id='$FID'>";
+		  	echo"<tr id='$FID' class='$tr'>";
 		  	echo "<td class='city'>$city</td>";
 		    
 		
@@ -173,6 +176,7 @@ function display($adi){
 			echo "<td class='status'>$status</td>";
 			echo "<td class='$gc_class'>$GC</td>";
 		  	echo"</tr>";
+			
 		  }	
 			if($nrows<$min_limit)
 			{	 
@@ -184,11 +188,11 @@ function display($adi){
 }
 function tomorrow($rows, $adi){
 	$rows=$rows-3;
-	
+	$rc=1;
 	$tomorrow=date('l F j Y', strtotime("+1 day"));
-	echo"<tr class='spacer'><td colspan='6'></td></tr>";
+	//echo"<tr class='spacer'><td colspan='6'></td></tr>";
 
-	echo"<tr class='tomorrow'><td colspan='6'>Flights for $tomorrow</td></tr>";
+	//echo"<tr class='tomorrow'><td colspan='6'>Flights for $tomorrow</td></tr>";
 	
 	
 	$tnow=date('Y-m-d', strtotime("+1 day"));
@@ -292,8 +296,10 @@ $result = mysql_query("SELECT * from $table where  date='$tnow' and adi='$adi' a
 			}
 		}
 		  
-		  
-		  echo"<tr id='$FID'>";
+		  	$tr=($rc % 2) ? "odd" :"even"; 	
+			
+		  	echo"<tr id='$FID' class='$tr'>";
+		//  echo"<tr id='$FID'>";
 		  echo "<td class='city'>$city</td>";
 		    
 		
@@ -306,6 +312,8 @@ $result = mysql_query("SELECT * from $table where  date='$tnow' and adi='$adi' a
 			   echo "<td class='status'>$status</td>";
 			    echo "<td class='$gc_class'>$GC</td>";
 		  echo"</tr>";
+		  $rc++;
+		  
 		  }	
 		
 	
@@ -604,6 +612,17 @@ function gate_display($gate){
 						  
 						  }
 	
+}
+function datetime(){
+	
+	$bldate=date('l F j Y');
+	$bltime=date('g:i A');
+	echo"<table width='100%'>";
+	echo"<tr id='date_time_bar'>";
+	echo"<td class='date'>$bldate</td>";
+	echo "<td class='time'>$bltime</td>";
+	echo"</tr>";
+	echo"</table>";
 }
 
 ?>

@@ -407,5 +407,30 @@ margin:auto;
 margin-top:100px;
 
 }
+.date
+{
+float:left;	
+font-size: 20px;
+}
+.time
+{
+	float:right;
+	
+	font-size: 20px;
+	text-align:right;
+}
+#date_time_bar
+{
+	width:98%;
+	
+	/*margin-bottom: 1%;*/
+	font-family: Arial, Helvetica, sans-serif;
+	position:absolute;
 
+	bottom:0px;
+	color:#FFF;
+	
+	/*letter-spacing: -.07em;
+	position: absolute;	*/
+}
 }
