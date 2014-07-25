@@ -9,7 +9,7 @@
 <body>
 <?php
 include ('functions.php');
-//mysql_query("Delete from temp");
+mysql_query("Delete from updated");
 function ts(){
 	echo date('H:i:s');
 	br();

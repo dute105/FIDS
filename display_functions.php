@@ -63,6 +63,12 @@ function display($adi){
 	//$result = mysql_query("SELECT * from $table, ac where $table.ac=ac.AC and adi='$adi' and $table.actual_time between '$now' and '$at' order by city asc, ac.ac asc, scheduled_time asc limit $rows");
 		$result = mysql_query("SELECT * from $table where adi='$adi' and $table.actual_time between '$now' and '$at' and iata !='TUS' and city !='' order by city asc, ac asc, scheduled_time asc limit $rows");
 	$nrows=mysql_num_rows($result);
+	if($nrows<$min_limit)
+			{	 
+				/*$trows=$rows-$nrows;
+				tomorrow($trows, $adi);*/
+				$result = mysql_query("SELECT * from $table where adi='$adi' and $table.actual_time >= '$now' and iata !='TUS' and city !='' order by city asc, ac asc, scheduled_time asc limit $rows");
+			}
 	if(mysql_num_rows($result)==0)
 		{
 			get_status($get_status, $time);

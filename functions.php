@@ -464,7 +464,8 @@ $result = mysql_query("SELECT * FROM iata where iata='$iata'");
 }
 function thin_codeshare($AC, $FLIGHT, $fid, $ADI, $IATA){
 	
-	$result = mysql_query("SELECT * from temp where FLIGHT_NUMBER_2='$FLIGHT' and AC2='$AC' and ADI='$ADI' and IATA='$IATA'");
+	$result = mysql_query("SELECT * from temp where FLIGHT_NUMBER_2='$FLIGHT'  and ADI='$ADI' and IATA='$IATA'");
+	// took out and AC2='$AC'
 	if(mysql_num_rows($result)==0)
 		{
 			// Do Something
@@ -476,6 +477,7 @@ function thin_codeshare($AC, $FLIGHT, $fid, $ADI, $IATA){
 	  {
 		  $FID=$row['FID'];
 		  mysql_query("update TEMP set CS=0 where FID='$FID'");
+		  mysql_query("update TEMP set CS=1 where FID='$fid'");
 	  }
 	
 	

@@ -6,8 +6,8 @@ include('display_functions.php');
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta http-equiv="refresh" content="<?php refresh("","d"); ?>">
-<title>Departures <?php refresh("","d"); ?></title>
+
+<title>Departures <?php //refresh("","d"); ?></title>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 <link href="src/boilerplate.css" rel="stylesheet" type="text/css">
 <link href="src/style.css" rel="stylesheet" type="text/css">
@@ -15,6 +15,15 @@ include('display_functions.php');
  <script src="src/jquery-1.10.2.js"></script>
   <script src="src/jquery-ui.js"></script>
   <script src="src/respond.min.js"></script>
+  <script type="text/javascript">// <![CDATA[
+$(document).ready(function() {
+$.ajaxSetup({ cache: false }); // This part addresses an IE bug.  without it, IE will only load the first number and will never refresh
+setInterval(function() {
+$('#display').load( "departures.php #display" );
+
+}, 60000); // the "3000" here refers to the time to refresh the div.  it is in milliseconds. 
+});
+// ]]></script>
   
 <script>
 $(document).ready(function() {
@@ -61,7 +70,7 @@ setInterval(function() {
   
   <div class="clears"></div>
   <div id='departures'>
- 
+ <div id="display">
 
 <?php
 
@@ -72,7 +81,7 @@ setInterval(function() {
 display('d');
 //arrivals();
 ?>
-
+</div>
 </div>
 
 <?php

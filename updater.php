@@ -4,7 +4,7 @@ $adi=$_GET['adi'];
 $display=$_GET['display'];
 
 
-
+//
 $result = mysql_query("SELECT * from updated  where  adi='$adi' order by actual_time limit 1");
 
 	if(mysql_num_rows($result)==0)
