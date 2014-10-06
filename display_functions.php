@@ -1,5 +1,18 @@
 <?php
 include('db.php');
+function session_check()
+	{
+		if (session_status() == PHP_SESSION_NONE) 
+			{
+				session_start();
+			}
+		else
+			{
+				
+				name_check();
+					
+			}
+	}
 function logo($ac){
 	$result = mysql_query("SELECT * from ac where AC='$ac'");
 	

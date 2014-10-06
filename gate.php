@@ -1,9 +1,10 @@
 <?php
 include ('display_functions.php');
-//$now=date('Y-m-d H:i:s',strtotime("-15 minute"));
+ session_check();
 
-$gate=strtoupper($_GET['id']);
+//$gate=strtoupper($_GET['id']);
 
+$gate=$_SESSION['param'];
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -52,10 +53,19 @@ cs_flight1();
 
 
 </script>
+<script type="text/javascript">// <![CDATA[
+$(document).ready(function() {
+$.ajaxSetup({ cache: false }); // This part addresses an IE bug.  without it, IE will only load the first number and will never refresh
+setInterval(function() {
+$('#display').load( "gate.php #display" );
+
+}, 30000); // the "3000" here refers to the time to refresh the div.  it is in milliseconds. 
+});
+// ]]></script>
 </head>
 
 <body>
-
+<div id="display">
 <div id="template">
 <?php
 gate_display($gate);
@@ -73,6 +83,6 @@ gate_display($gate);
 datetime();
 ?>
 
-
+</div>
 </body>
 </html>

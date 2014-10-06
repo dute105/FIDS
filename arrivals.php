@@ -22,7 +22,7 @@ $.ajaxSetup({ cache: false }); // This part addresses an IE bug.  without it, IE
 setInterval(function() {
 $('#display').load( "arrivals.php #display" );
 
-}, 60000); // the "3000" here refers to the time to refresh the div.  it is in milliseconds. 
+}, 120000); // the "3000" here refers to the time to refresh the div.  it is in milliseconds. 
 });
 // ]]></script>
 <script>

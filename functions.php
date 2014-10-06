@@ -310,26 +310,30 @@ function next_status(){
 	$day="$date 22:00:00";
 	$i=0;
 	
+	echo "Start<br />";
 	while($time<$day){
 	$result = mysql_query("SELECT * from temp where DATE='$date' order by ACTUAL_TIME desc limit 1");
 	if(mysql_num_rows($result)==0)
 		{
 			
+			echo"$i ";
 			get_status("arr", $time);
 			get_status("dep", $time);
 			get_status("arr", $tomorrow);
 			get_status("dep", $tomorrow);
 			comnet();
+			echo"$i <br />";
 		}
 	
 	while($row = mysql_fetch_array($result))
 	
 	  {
-		 
+		 echo"B $i ";
 		 	$time=$row['ACTUAL_TIME'];
 			echo"$time<br />";
 			get_status("arr", $time);
 			get_status("dep", $time);
+			echo"$i <br />";
 		 
 		 $i++;
 		 if($i>2)

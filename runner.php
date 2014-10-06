@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>runner</title>
+<title>runner 342</title>
 <meta http-equiv="refresh" content="120">
 </head>
 
@@ -21,7 +21,7 @@ comnet();
 cs();
 check_temp();
 update_from_temp();		  
-ts();		 
+ts();/**/		 
 
 
 
