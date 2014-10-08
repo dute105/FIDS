@@ -318,6 +318,7 @@ function next_status(){
 			
 			echo"$i ";
 			get_status("arr", $time);
+			
 			get_status("dep", $time);
 			get_status("arr", $tomorrow);
 			get_status("dep", $tomorrow);
@@ -328,7 +329,7 @@ function next_status(){
 	while($row = mysql_fetch_array($result))
 	
 	  {
-		 echo"B $i ";
+		 echo"We have Rows:  $i ";
 		 	$time=$row['ACTUAL_TIME'];
 			echo"$time<br />";
 			get_status("arr", $time);
@@ -340,6 +341,10 @@ function next_status(){
 		 {$time="$day 22:00:00";}
 		
 		  }
+		   $i++;
+		 if($i>2)
+		 {$time="$day 22:00:00";}
+		  
 	}
 }
 	
@@ -410,7 +415,7 @@ foreach($xml->row as $Flight){
 	$status=$status_array[$status];
 	$iata=$Flight->city['code'];
 	$city=$Flight->city;
-	$city=strtoupper($city);
+	
 	$date=date('Y-m-d');
 	$fid="Comnet:".$ac.$flight_number.":".$iata.":".$scheduled_date.":".$scheduled_hm;
 	settype($ac, "string");
@@ -429,7 +434,7 @@ foreach($xml->row as $Flight){
 		}
 		
 		$city=city($iata);
-				
+		$city=strtoupper($city);		
 	
 	if($actual_time>=$now)
 		{

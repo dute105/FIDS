@@ -28,7 +28,8 @@ img, object, embed, video {
 
 /* Mobile Layout: 480px and below. */
 .new{
-	color:#0F0;
+	color: #FFF;
+	
 }
 .Delayed{
 	color:#FF3;
@@ -57,6 +58,12 @@ img, object, embed, video {
     25%  {opacity: .5;}
     50%  {opacity: 1;}
     100% {opacity: .5;}
+}
+@-webkit-keyframes half-blink {
+    0%   {opacity: .5;}
+    25%  {opacity: .5;}
+    50%  {opacity: 1;}
+    100% {opacity: 1;}
 }
 
 .gridContainer {

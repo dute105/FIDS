@@ -11,6 +11,9 @@ background-color:#0F0;
 #logo{
 	float:right;
 	max-width:200px;
+	position:absolute;
+	top:15px;
+	right:10px;
 	/*padding:20px;*/
 	
 }
@@ -19,12 +22,12 @@ background-color:#0F0;
 }
 #arrivals{
 	
-	height: 1220px;
+	height: 1240px;
 	overflow: hidden;
 	font-weight: bold;	
 }
 #departures{
-	height: 1220px;
+	height: 1240px;
 	overflow: hidden;
 	font-weight: bold;	
 	
@@ -72,6 +75,7 @@ header{
 	float:left;
 	height:22px;
 	
+	
 }
 .actext{
 	
@@ -94,10 +98,12 @@ font-size: 20px;
 }
 #date_time_bar
 {
-	width:100%;
+	width: 100%;
 	
-	margin-bottom: 1%;
 	font-family: Arial, Helvetica, sans-serif;
+	position: absolute;
+	bottom: 1px;	
+	
 	
 	/*letter-spacing: -.07em;
 	position: absolute;	*/
@@ -110,9 +116,15 @@ font-size: 20px;
 .even{
 		background-image:url(even.png)
 }
-
-.city, .ac, .flight, .status,.gate,.claim,.scheduled_time {
-	width:127px;
+.city, .status
+{
+	width:320px;
+	
+	
+	
+}
+.ac, .flight, .gate,.claim,.scheduled_time {
+	width:200px;
 	
 }
 @media only screen and (min-width: 769px) {
