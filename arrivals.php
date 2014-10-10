@@ -1,12 +1,22 @@
 <?php
 include('db.php');
 include('display_functions.php');
+include('fx_device.php');
+
+session_check();
+
+$name=name_check();
+
+$max=endtime();
+$_SESSION['sleeper']=$_SERVER['PHP_SELF'];
+wake($name, $max, "arrivals.php");
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta http-equiv="refresh" content="<?php //refresh("","a"); ?>">
+<meta http-equiv="refresh" content="<?php echo 300;//refresh("","a"); ?>">
+
 <title>Arrivals <?php //refresh("","a"); ?></title>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 <link href="src/boilerplate.css" rel="stylesheet" type="text/css">

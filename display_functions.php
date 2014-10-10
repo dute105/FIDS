@@ -1,18 +1,6 @@
 <?php
 include('db.php');
-function session_check()
-	{
-		if (session_status() == PHP_SESSION_NONE) 
-			{
-				session_start();
-			}
-		else
-			{
-				
-				name_check();
-					
-			}
-	}
+
 function logo($ac){
 	$result = mysql_query("SELECT * from ac where AC='$ac'");
 	
@@ -73,14 +61,20 @@ function display($adi){
 	$at=max_time($adi,$rows, 'today');
 	$now=date('Y-m-d H:i', strtotime("-15 minute"));
 	
-	//$result = mysql_query("SELECT * from $table, ac where $table.ac=ac.AC and adi='$adi' and $table.actual_time between '$now' and '$at' order by city asc, ac.ac asc, scheduled_time asc limit $rows");
+
 		$result = mysql_query("SELECT * from $table where adi='$adi' and $table.actual_time between '$now' and '$at' and iata !='TUS' and city !='' order by city asc, ac asc, scheduled_time asc limit $rows");
 	$nrows=mysql_num_rows($result);
+	
 	if($nrows<$min_limit)
 			{	 
-				/*$trows=$rows-$nrows;
-				tomorrow($trows, $adi);*/
-				$result = mysql_query("SELECT * from $table where adi='$adi' and $table.actual_time >= '$now' and iata !='TUS' and city !='' order by city asc, ac asc, scheduled_time asc limit $rows");
+				
+				$trows=$rows-$nrows;
+			
+			
+				$at=max_time($adi,$trows, 'tomorrow');
+				
+			
+				$result = mysql_query("SELECT * from $table where adi='$adi' and $table.actual_time between '$now' and '$at' and iata !='TUS' and city !='' order by city asc, ac asc, scheduled_time asc limit $rows");
 			}
 	if(mysql_num_rows($result)==0)
 		{
@@ -102,13 +96,15 @@ function display($adi){
 	
 	  {
 		  $FID=$row['fid'];
-		  $city=strtoupper($row['city']);
+		 // $city=strtoupper($row['city']);
+		 $iata=$row['iata'];
+		  $city=strtoupper(city_display($iata));
 		  $ac=$row['ac'];
 		   $ac2=$row['ac2'];
 		   $IMG=logo($ac);
 		  $flight=$row['flight_number'];
 		  $status=$row['status'];
-		 
+		  $status=status($status);		 
 		   $gate=$row['gate'];
 		  $claim=$row['claim'];
 		  $scheduled_time=$row['scheduled_time'];
@@ -246,12 +242,15 @@ $result = mysql_query("SELECT * from $table where  date='$tnow' and adi='$adi' a
 	
 	  {
 		  $FID=$row['fid'];
-		  $city=strtoupper($row['city']);
+		  $iata=$row['iata'];
+		 // $city=strtoupper($row['city']);
+		  $city=strtoupper(city_display($iata));
 		  $ac=$row['ac'];
 		   $ac2=$row['ac2'];
 		 $IMG=logo($ac);
 		  $flight=$row['flight_number'];
 		  $status=$row['status'];
+		$status=status($status);		
 		 
 		   $gate=$row['gate'];
 		  $claim=$row['claim'];
@@ -551,7 +550,7 @@ function gate_display($gate){
 			  $start_date = new DateTime($scheduled_time);
 				$since_start = $start_date->diff(new DateTime($actual_time));
 	
-				$dif= $since_start->i;
+				$dif= $since_start->hi;
 				if($dif>4)
 					{
 					if($status=="On Time")
@@ -643,5 +642,25 @@ function datetime(){
 	echo"</tr>";
 	echo"</table>";
 }
+function city($iata)
+{
+$result = mysql_query("SELECT * FROM iata where iata='$iata'");
+		while($row = mysql_fetch_array($result))
+		{$iata= $row['city'];}
+		return $iata;
+	
+}
+function status($status)
+	{
+		$result=mysql_query("Select * from status where raw='$status'");
+		while($row = mysql_fetch_array($result))
+	
+	  { 
+		
+		 $status=$row['status'];
+		
+	  }
+		return $status;
+	}
 
 ?>

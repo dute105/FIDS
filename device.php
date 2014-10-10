@@ -1,6 +1,6 @@
 <?php
 include('fx_device.php');
-include('db.php');
+
 //session_start(); session_destroy();
 function br()
 {echo"<br>";}

@@ -1,0 +1,48 @@
+@charset "utf-8";
+
+body{
+	background-color:#000;
+	color:#FFFFFF;	
+}
+
+/*Reset*/
+* {
+	margin: 0;
+	padding: 0;
+}
+
+#sleep
+{
+	 width:60%;
+	 left:20%;
+	  -webkit-animation: move 120s infinite alternate;
+	 position:absolute;
+}
+
+/*Animation Prefs*/
+@-webkit-keyframes pulse {
+		0% {background-color: #000;}
+      10% {background-color: #45CEEF;}
+     25% {background-color: #FFF5A5;}
+     50% {background-color: #fea6f5;}
+     75% {background-color: #99D2E4;}
+     100% {background-color: #000;}
+}
+@-webkit-keyframes move {
+		0% {top:-150px;}
+      100% {top:1200px; }
+    
+   
+}
+
+/*Body Styles*/
+body {
+    -webkit-animation: pulse 120s infinite alternate;
+   /* background-color: #45CEEF;*/
+}
+
+
+@media only screen and (min-width: 769px) {
+
+
+}

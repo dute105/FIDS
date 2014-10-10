@@ -1,9 +1,12 @@
 <?php
-
+include('db.php');
 function session_check()
 	{
-		if (session_status() == PHP_SESSION_NONE) 
+		
+		if (session_id()=="") 
+		//if (session_status() == PHP_SESSION_NONE) 
 			{
+				
 				session_start();
 			}
 		else
@@ -112,5 +115,83 @@ else
 	header('Location: '.$location);
 	
 }	
+
+function wake($name, $time, $location)
+	{
+		
+		$now=date('Y-m-d H:i:s');
+		
+		//$now="2014-10-11 03:00:00";
+		if ($now>$time)
+			{
+				mysql_query("INSERT INTO sleep (name, state, date)VALUES ('$name', 'SLEEP', '$now')");
+				$_SESSION['sleep']=$time;
+				header("Location: sleep.php?l=".$location);
+				
+			}
+		
+		
+		
+		
+		
+		
+	}
+function asleep($name, $time, $location)
+	{
+		
+		$now=date('Y-m-d H:i:s');
+		//$now="2014-10-11 03:06:00";
+		
+		if ($now>$time)
+			{
+				mysql_query("INSERT INTO sleep (name, state, date)VALUES ('$name', 'WAKE', '$now')");
+				$_SESSION['sleep']=$time;
+				header("Location: $location");
+				
+			}
+		
+		
+		
+		
+		
+		
+	}
+	function endtime()
+{
+	$day=date('Y-m-d');
+	$result=mysql_query("Select MAX(actual_time)as max from current where date='$day'");
+	
+	
+	while($row = mysql_fetch_array($result))
+	
+	  { 
+		  $max=$row['max'];
+		  $max=strtotime($max);
+			$max=strtotime("+1 hour", $max);
+			$max=date("Y-m-d H:i:s",$max);
+			
+		  
+		 return $max;
+	  }
+	
+}
+function starttime($time)
+	{
+		$result=mysql_query("Select actual_time from current where actual_time>'$time' order by actual_time limit 1");
+	
+	
+	while($row = mysql_fetch_array($result))
+	
+	  { 
+		  $start=$row['actual_time'];
+		  $start=strtotime($start);
+			$start=strtotime("-2 hour", $start);
+			$start=date("Y-m-d H:i:s",$start);
+			
+		  
+		 return $start;
+	  }
+		
+	}
 	
 ?>

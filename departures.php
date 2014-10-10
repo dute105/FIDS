@@ -1,6 +1,16 @@
 <?php
 include('db.php');
 include('display_functions.php');
+include('fx_device.php');
+
+session_check();
+
+$name=name_check();
+
+$max=endtime();
+$_SESSION['sleeper']=$_SERVER['PHP_SELF'];
+wake($name, $max, "departures.php");
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -8,6 +18,7 @@ include('display_functions.php');
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 <title>Departures <?php //refresh("","d"); ?></title>
+<meta http-equiv="refresh" content="300">
   <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 <link href="src/boilerplate.css" rel="stylesheet" type="text/css">
 <link href="src/style.css" rel="stylesheet" type="text/css">
